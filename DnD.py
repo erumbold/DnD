@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
