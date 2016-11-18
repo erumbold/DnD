@@ -134,14 +134,14 @@ def login():
 					session['username'] = user.username
 					form.username.data = ''
 					form.password.data = ''
-					return redirect(url_for('home')
+					return redirect(url_for('home'))
 				
 			flash('There is no user with that password')
 			form.username.data = ''
 			form.password.data = ''
 			return redirect(url_for('login'))
 
-		return render_template("login.html", form=form, name=name)
+		return render_template("login.html", form=form, name=username)
 
 	return render_template("loggedIn.html", name=session['username'])
 
@@ -172,7 +172,7 @@ def newUser():
 
 		return render_template("newUser.html", form=form, name=username)
 
-	return render_template("loggedIn.html", name=session['username']
+	return render_template("loggedIn.html", name=session['username'])
 
 
 def testUser():
