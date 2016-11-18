@@ -1,6 +1,6 @@
 import os
 from _curses import flash
-#
+
 from flask import Flask, redirect, render_template, session, url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
