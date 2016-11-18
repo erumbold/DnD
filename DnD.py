@@ -97,7 +97,7 @@ class Character(db.Model):
     int_mod = db.Column(db.Integer)
     wis_mod = db.Column(db.Integer)
     cha_mod = db.Column(db.Integer)
-    # saving throws - check boxes, can only pick 2
+    # saving throws - check boxes, only pick 2
     str_save = db.Column(db.Boolean)
     dex_save = db.Column(db.Boolean)
     con_save = db.Column(db.Boolean)
