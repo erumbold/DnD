@@ -125,7 +125,7 @@ class Character(db.Model):
     survival = db.Column(db.Boolean)
 
 
-@app.route('/login', methods=["POST"])
+@app.route('/login', methods=["GET", "POST"])
 def login():
     if (session['username'] == None):
         username = None
@@ -147,7 +147,7 @@ def login():
     return render_template("loggedIn.html", name=session['username'])
 
 
-@app.route('/new_user', methods=["POST"])
+@app.route('/new_user', methods=["GET", "POST"])
 def newUser():
     if (session['username'] == None):
         username = None
