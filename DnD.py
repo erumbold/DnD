@@ -71,10 +71,10 @@ class Character(db.Model):
     campaign_id = db.Column(db.Integer, db.ForeignKey('Campaign.id'))
     # basic character info
     name = db.Column(db.String(64))
-    race = db.Column(db.String(64))
-    cClass = db.Column(db.String(64))
+    race = db.Column(db.String(64))     # drop down
+    cClass = db.Column(db.String(64))   # drop down
     level = db.Column(db.Integer)
-    hit_dice = db.Column(db.String())
+    hit_dice = db.Column(db.String())   # drop down
     total_hit_dice = db.Column(db.Integer)
     prof_bonus = db.Column(db.Integer)
     exp_points = db.Column(db.Integer)
@@ -97,14 +97,14 @@ class Character(db.Model):
     int_mod = db.Column(db.Integer)
     wis_mod = db.Column(db.Integer)
     cha_mod = db.Column(db.Integer)
-    # saving throws
+    # saving throws - check boxes, can only pick 2
     str_save = db.Column(db.Boolean)
     dex_save = db.Column(db.Boolean)
     con_save = db.Column(db.Boolean)
     int_save = db.Column(db.Boolean)
     wis_save = db.Column(db.Boolean)
     cha_save = db.Column(db.Boolean)
-    # skills
+    # skills - check boxes
     acrobatics = db.Column(db.Boolean)
     animal_handling = db.Column(db.Boolean)
     arcana = db.Column(db.Boolean)
