@@ -11,6 +11,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'da
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 db = SQLAlchemy(app)
 
+
+bootstrap = Bootstrap(app)
+
 # Forms
 class LoginForm(Form):
 	username = StringField("Username", validators=[Required()])
