@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}Comics{% endblock %}
+{% block title %}Dungeons and Dragons{% endblock %}
 
 {% block head %}
 {{ super() }}
@@ -18,13 +18,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" href="/">Image Goes Here</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/list">Comic List</a></li>
-                <li><a href="/AddNewPub">Add New Publisher</a></li>
-                <li><a href="/AddNewComic">Add New Comic</a></li>
+                <li class="active switch"><a href="#">Sheets</a></li>
+                <li class="switch"><a href="#">Campaigns</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right navbarLogin">
+                <li><a href="#"><span class="glyphicon glyphicon-log-in navbarLogin"></span> Login</a></li>
             </ul>
         </div>
     </div>
@@ -36,13 +38,6 @@
     {% block page_content %}{% endblock %}
 </div>
 
-<div class="container">
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-    </div>
-    {% endfor %}
 {% endblock %}
 
 
