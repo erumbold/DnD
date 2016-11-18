@@ -1,0 +1,104 @@
+body{
+    font-family: "Footlight MT Light";
+}
+
+a{
+    color:#ffffff;
+}
+
+.navbar{
+    background-color: #af000a;
+    color: #ffffff !important;
+    padding:20px;
+    margin-top:0px;
+    margin-bottom: 0;
+    border-radius: 0;
+    font-size: 30px;
+}
+
+.navbarColor:active{
+    background-color: #219823;
+}
+
+.navbarLogin{
+    font-size: 20px;
+}
+
+.switch:hover {
+    background-color: #219823;
+}
+
+.headings{
+    font-weight: bold;
+}
+
+.page{
+    font-style: italic;
+}
+
+.alignLeft{
+    float:left;
+    position: absolute;
+}
+
+.alignRight{
+    float:right;
+}
+
+.inner{
+    padding: 15px;
+    margin-left:100px;
+    margin-right:100px;
+}
+
+.loginDiv{
+    margin-top:15%;
+    margin-left:40%;
+    margin-right:45%;
+    width: 300px;
+    height:200px;
+    padding: 20px;
+    padding-bottom: 200px;
+    background-color:#ffffff;
+    border-radius: 1em;
+}
+
+.button1{
+    background-color: #af000a;
+    color:#000000;
+    padding-left: 15px;
+    padding-right:15px;
+    padding-top:1px;
+    padding-bottom: 1px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    box-shadow: 2px 1px 3px rgba(0,0,0,0.82),
+                2px 1px 3px rgba(0,0,0,0.62),
+                0 1px 3px rgba(0,0,0,0.42),
+                0 1px 2px rgba(0,0,0,0.24);
+}
+
+.button2{
+    background-color: #af000a;
+    color:#ffffff;
+    padding-left: 15px;
+    padding-right:15px;
+    padding-top:1px;
+    padding-bottom: 1px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    box-shadow: 2px 1px 3px rgba(0,0,0,0.82),
+                2px 1px 3px rgba(0,0,0,0.62),
+                0 1px 3px rgba(0,0,0,0.42),
+                0 1px 2px rgba(0,0,0,0.24);
+}
+
+.loginPage{
+    background-color: #af000a;
+    color:#000000;
+    font-size: 20px;
+}
+
+.textCenter{
+    text-align: center;
+}
