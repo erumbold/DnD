@@ -205,7 +205,7 @@ def new_user():
             form.username.data = ''
             form.password.data = ''
             session['username'] = username
-            return redirect(url_for('new_user'))
+            return redirect(url_for('user', name=session['username']))
         return render_template("New_User.html", form=form, name=username)
     return render_template("Logged_In.html", name=session['username'])
 
