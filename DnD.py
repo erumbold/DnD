@@ -26,7 +26,8 @@ bootstrap = Bootstrap(app)
 # 4.Creating a Character
 # 5.Adding Characters to Campaigns
 # 6.Being able to make people DMs of a campaign
-# 7.Sending an email to everyone in a campaign at once and individually (DM feature)
+# 7.Adding logs to a campaign
+# 8.Sending an email to everyone in a campaign at once and individually (DM feature)
 
 
 # Forms
