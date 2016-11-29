@@ -308,7 +308,7 @@ def testCharacter():
 def testEvent():
     summary = "A long time ago in a galaxy far, far away"
     description = "It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire."
-    db.session.add(Event(campaign_id=1, summary=summary, description=description))
+    db.session.add(EventLog(campaign_id=1, summary=summary, description=description))
     db.session.commit()
 
 if __name__ == '__main__':
