@@ -3,7 +3,7 @@ from flask import Flask, redirect, render_template, session, url_for, flash
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_wtf import Form
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import Required
 
 
@@ -32,8 +32,7 @@ bootstrap = Bootstrap(app)
 # Forms
 class LoginForm(Form):
     username = StringField("Username", validators=[Required()])
-    # Make passwords hidden later
-    password = StringField("Password", validators=[Required()])
+    password = PasswordField("Password", validators=[Required()])
     submit = SubmitField("Login")
 
 
@@ -135,6 +134,12 @@ class Character(db.Model):
     survival = db.Column(db.Boolean)
 
 
+@app.before_request
+def init_session():
+    if ('username' not in session):
+        session['username'] = None
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
@@ -171,11 +176,11 @@ def login():
                     session['username'] = user.username
                     form.username.data = ''
                     form.password.data = ''
-                    return redirect(url_for('home'))
+                    return redirect(url_for('user', name=session['username']))
             flash('There is no user with that password')
             form.username.data = ''
             form.password.data = ''
-            return redirect(url_for('user'))
+            return redirect(url_for('login'))
         return render_template("Login.html", form=form, name=username)
     return render_template("Logged_In.html", name=session['username'])
 
@@ -192,16 +197,17 @@ def new_user():
                 form.username.data = ''
                 form.password.data = ''
                 return redirect(url_for('new_user'))
-            flash('Your account, ' + form.name.data + ', has been created')
+            flash('Your account, ' + form.username.data + ', has been created')
             username = form.username.data
             password = form.password.data
             user = User(username=username, password=password)
             db.session.add(user)
             form.username.data = ''
             form.password.data = ''
+            session['username'] = username
             return redirect(url_for('new_user'))
         return render_template("New_User.html", form=form, name=username)
-    return render_template("loggedIn.html", name=session['username'])
+    return render_template("Logged_In.html", name=session['username'])
 
 
 @app.route('/characters')
