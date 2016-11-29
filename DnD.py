@@ -1,11 +1,11 @@
 import os
-from _curses import flash
-#
-from flask import Flask, redirect, render_template, session, url_for
+from flask import Flask, redirect, render_template, session, url_for, flash
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
-from wtforms import Form, StringField
+from flask_wtf import Form
+from wtforms import StringField, SubmitField
 from wtforms.validators import Required
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -19,13 +19,22 @@ db = SQLAlchemy(app)
 bootstrap = Bootstrap(app)
 
 
+# TODO:
+# 1.Logging in
+# 2.Logging out
+# 3.Viewing a Character
+# 4.Creating a Character
+# 5.Adding Characters to Campaigns
+# 6.Being able to make people DMs of a campaign
+# 7.Sending an email to everyone in a campaign at once and individually (DM feature)
+
+
 # Forms
 class LoginForm(Form):
     username = StringField("Username", validators=[Required()])
     # Make passwords hidden later
     password = StringField("Password", validators=[Required()])
-    def __repr__(self):
-        return self.username
+    submit = SubmitField("Login")
 
 
 # Database classes
@@ -34,33 +43,34 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True)
     password = db.Column(db.String(64))
-    campaigns = db.relationship('Campaign', secondary='user_campaign_link')
+    campaigns = db.relationship('Campaign', secondary='User_Campaign_Link')
 
 
 # connection for User-to-Campaign many-to-many relationship
 class UserCampaignLink(db.Model):
-    __tablename__ = "user_campaign_link"
+    __tablename__ = "User_Campaign_Link"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
-    campaign_id = db.Column(db.Integer, db.ForeignKey('Campaign.id'))
-    is_DM = db.Column(db.Boolean)
-    user = db.relationship('User', backref=db.backref('campaign_assoc'))
-    campaign = db.relationship('Campaign', backref=db.backref('user_assoc'))
+    userID = db.Column(db.Integer, db.ForeignKey('User.id'))
+    campaignID = db.Column(db.Integer, db.ForeignKey('Campaign.id'))
+    isDM = db.Column(db.Boolean)
+    user = db.relationship('User', backref=db.backref('Campaign_assoc'))
+    campaign = db.relationship('Campaign', backref=db.backref('User_assoc'))
 
 
-class Campaign(db.Model):
-    __tablename__ = "Campaign"
-    id = db.Column(db.Integer, primary_key=True)
-    events = db.relationship('Event', backref='campaign')
-    users = db.relationship('User', secondary='user_campaign_link')
-
-
-class Event(db.Model):
+class EventLog(db.Model):
     __tablename__ = "EventLog"
     id = db.Column(db.Integer, primary_key=True)
     campaign_id = db.Column(db.Integer, db.ForeignKey('Campaign.id'))
     summary = db.Column(db.String(256))
     description = db.Column(db.String(256))
+
+
+class Campaign(db.Model):
+    __tablename__ = "Campaign"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    events = db.relationship('EventLog', backref='Campaign')
+    users = db.relationship('User', secondary='User_Campaign_Link')
 
 
 class Character(db.Model):
@@ -125,9 +135,32 @@ class Character(db.Model):
     survival = db.Column(db.Boolean)
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+# 500 Page
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
+
+
+@app.route("/user/<name>")
+def user(name):
+    return render_template('User_Page.html', name=name)
+
+
+# To be called when the player clicks the logout button
+@app.route("/logout")
+def logout():
+    session['username'] = None
+    return redirect(url_for('homepage'))
+
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    if (session['username'] == None):
+    if (session['username'] is None):
         username = None
         password = None
         form = LoginForm()
@@ -142,20 +175,20 @@ def login():
             flash('There is no user with that password')
             form.username.data = ''
             form.password.data = ''
-            return redirect(url_for('login'))
-        return render_template("login.html", form=form, name=username)
-    return render_template("loggedIn.html", name=session['username'])
+            return redirect(url_for('user'))
+        return render_template("Login.html", form=form, name=username)
+    return render_template("Logged_In.html", name=session['username'])
 
 
 @app.route('/new_user', methods=["GET", "POST"])
-def newUser():
-    if (session['username'] == None):
+def new_user():
+    if (session['username'] is None):
         username = None
         password = None
         form = LoginForm()
         if (form.validate_on_submit()):
             if (form.username.data in [user.username for user in User.query.all()]):
-                flash(form.username.data + ' is already in the database')
+                flash('The username ' + form.username.data + ' is already in use')
                 form.username.data = ''
                 form.password.data = ''
                 return redirect(url_for('new_user'))
@@ -166,9 +199,30 @@ def newUser():
             db.session.add(user)
             form.username.data = ''
             form.password.data = ''
-            return redirect(url_for('new_game'))
-        return render_template("newUser.html", form=form, name=username)
+            return redirect(url_for('new_user'))
+        return render_template("New_User.html", form=form, name=username)
     return render_template("loggedIn.html", name=session['username'])
+
+
+@app.route('/characters')
+def character_list():
+    if (session['username'] is None):
+        return render_template("Must_Login.html")
+
+    return render_template("Characters.html")
+
+
+@app.route('/campaigns')
+def campaign_list():
+    if (session['username'] is None):
+        return render_template("Must_Login.html")
+
+    return render_template("Campaigns.html")
+
+
+@app.route('/')
+def homepage():
+    return render_template("Home.html")
 
 
 def testUser():
@@ -179,8 +233,8 @@ def testUser():
 
 def testCampaign():
      db.session.add(Campaign())
-     db.session.add(UserCampaignLink(user_id=1, campaign_id=1, is_DM=True))
-     db.session.add(UserCampaignLink(user_id=2, campaign_id=1, is_DM=False))
+     db.session.add(UserCampaignLink(userID=1, campaignID=1, isDM=True))
+     db.session.add(UserCampaignLink(userID=2, campaignID=1, isDM=False))
      db.session.commit()
 
 def testCharacter():
@@ -252,11 +306,5 @@ def testEvent():
     db.session.commit()
 
 if __name__ == '__main__':
-    db.drop_all()
     db.create_all()
-    testUser()
-    testCampaign()
-    testCharacter()
-    testEvent()
-    db.session.commit()
     app.run()
