@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dd118c7-4024-444c-9042-f366821ddda4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DnD.py" afterPath="$PROJECT_DIR$/DnD.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data.sqlite" afterPath="$PROJECT_DIR$/data.sqlite" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
     </list>
     <ignored path="DnD.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -544,7 +540,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480444447116</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Finished Login">
+      <created>1480446159864</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1480446159864</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -584,7 +587,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Organized Project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Organized Project" />
+    <MESSAGE value="Finished Login" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished Login" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
