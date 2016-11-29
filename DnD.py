@@ -20,7 +20,7 @@ bootstrap = Bootstrap(app)
 
 
 # TODO:
-# 1.Logging in
+# 1.Logging in (COMPLETE)
 # 2.Logging out
 # 3.Viewing a Character
 # 4.Creating a Character
@@ -136,7 +136,7 @@ class Character(db.Model):
 
 @app.before_request
 def init_session():
-    if ('username' not in session):
+    if ('username' not in session.keys()):
         session['username'] = None
 
 
