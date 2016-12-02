@@ -3,7 +3,7 @@ body{
 }
 
 a{
-    color:#ffffff;
+    color:#000000;
 }
 
 .navbar{
@@ -16,17 +16,17 @@ a{
     font-size: 30px;
 }
 
-.navbarColor:active{
-    background-color: #219823;
-}
+/*.navbarColor:active{*/
+    /*background-color: #219823;*/
+/*}*/
 
 .navbarLogin{
     font-size: 20px;
 }
 
-.switch:hover {
-    background-color: #219823;
-}
+/*.switch:hover {*/
+    /*background-color: #219823;*/
+/*}*/
 
 .headings{
     font-weight: bold;
@@ -34,6 +34,11 @@ a{
 
 .page{
     font-style: italic;
+    color: #000;
+}
+
+.pageLink{
+    color: #000;
 }
 
 .alignLeft{
