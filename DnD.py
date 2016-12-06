@@ -225,10 +225,16 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('500.html'), 500
 
+@app.route("/user/characters/<name>")
+def character(name):
+    return render_template("Home.html")
 
 @app.route("/user/<name>")
 def user(name):
-    return render_template('User_Page.html', name=name)
+    return render_template('User_Page.html', name=name,
+                           characters=[c.name for c in Character.query.filter_by(
+                               user_id=User.query.filter_by(
+                                    username=session['username']).first().id)])
 
 
 # To be called when the player clicks the logout button
@@ -390,7 +396,10 @@ def new_character():
             stealth = form.stealth.data
             survival = form.survival.data
 
-            db.session.add(Character(user_id=2, campaign_id=1, name=name, race=race, cClass=cClass, level=level, hit_dice=hit_dice,
+            userID = User.query.filter_by(username=session['username']).first().id
+            campaignID = 0
+
+            db.session.add(Character(user_id=userID, campaign_id=campaignID, name=name, race=race, cClass=cClass, level=level, hit_dice=hit_dice,
                           total_hit_dice=total_hit_dice,
                           prof_bonus=prof_bonus, exp_points=exp_points, armor_class=armor_class, speed=speed,
                           max_HP=max_HP,
