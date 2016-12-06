@@ -28,6 +28,7 @@ a{
 .page{
     font-style: italic;
     color: #000;
+    font-family: "Footlight MT Light";
 }
 
 .pageLink{
@@ -99,4 +100,9 @@ a{
 
 .textCenter{
     text-align: center;
+}
+
+.logoImage{
+    width:400px;
+    height:auto;
 }
