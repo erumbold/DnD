@@ -16,20 +16,13 @@ a{
     font-size: 30px;
 }
 
-/*.navbarColor:active{*/
-    /*background-color: #219823;*/
-/*}*/
-
 .navbarLogin{
     font-size: 20px;
 }
 
-/*.switch:hover {*/
-    /*background-color: #219823;*/
-/*}*/
-
 .headings{
     font-weight: bold;
+    font-family: "Footlight MT Light";
 }
 
 .page{
