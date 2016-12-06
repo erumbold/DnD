@@ -102,7 +102,9 @@ a{
     text-align: center;
 }
 
-.logoImage{
-    width:400px;
-    height:auto;
+img{
+    width:auto;
+    height:100px;
+    padding:0px;
+    margin:0px;
 }
