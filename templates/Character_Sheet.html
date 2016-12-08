@@ -2,37 +2,55 @@
 {% block title %}Dungeons and Dragons{% endblock %}
 
 {% block page_content %}
-
-        <nav class="navbar">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">Image Goes Here</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-              <ul class="nav navbar-nav ">
-                <li class="active switch"><a href="#">Sheets</a></li>
-                <li class="switch"><a href="#">Campaigns</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right navbarLogin">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in navbarLogin"></span> Login</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
         <div class="inner">
-            <h2> Character Name</h2>
+            <h2> {{ name }} </h2>
+            <h2> {{ cClass }} level {{ level }}</h2>
+            {% if campaign %}
+            <h3> Current Campaign: {{ campaign }}</h3>
+            {% else %}
+            <h3> This character is currently not enrolled in a campaign</h3>
+            {% endif %}
             <br><br>
             <div class="alignLeft textCenter">
-                <h4>Info</h4>
-            </div>
-            <div class="alignRight textCenter">
-                <h4>info</h4>
+                <h3>General Stats:</h3>
+                <h4>Race: {{ race }}</h4>
+                <h4>HP: {{ curr_HP }}/{{ max_HP }}</h4>
+                <h4>Temp HP: {{ temp_HP }}</h4>
+                <h4>Hit Dice: {{ hit_dice }}</h4>
+                <h4>Total Hit Dice: {{ total_hit_dice }}</h4>
+                <h4>Proficiency Bonus: {{ prof_bonus }}</h4>
+                <h4>Experience Points: {{ exp_points }}</h4>
+                <h4>Armor Class: {{ armor_class }}</h4>
+                <h4>Speed: {{ speed }}</h4>
+
+                <h3>Stats:</h3>
+                <h4>Str: {{ str }}, modifier: {{ str_mod }}, {% if not str_save %}No {% endif %}Saving Throw</h4>
+                <h4>Dex: {{ dex }}, modifier: {{ dex_mod }}, {% if not dex_save %}No {% endif %}Saving Throw</h4>
+                <h4>Con: {{ con }}, modifier: {{ con_mod }}, {% if not con_save %}No {% endif %}Saving Throw</h4>
+                <h4>Int: {{ int }}, modifier: {{ int_mod }}, {% if not int_save %}No {% endif %}Saving Throw</h4>
+                <h4>Wis: {{ wis }}, modifier: {{ wis_mod }}, {% if not wis_save %}No {% endif %}Saving Throw</h4>
+                <h4>Cha: {{ cha }}, modifier: {{ cha_mod }}, {% if not cha_save %}No {% endif %}Saving Throw</h4>
+
+                <h3>Skills</h3>
+                <h4>Acrobatics: {% if acrobatics %}Yes{% else %}No{% endif %}</h4>
+                <h4>Animal Handling: {% if animal_handling %}Yes{% else %}No{% endif %}</h4>
+                <h4>Arcana: {% if arcana %}Yes{% else %}No{% endif %}</h4>
+                <h4>Athletics: {% if athletics %}Yes{% else %}No{% endif %}</h4>
+                <h4>Deception: {% if deception %}Yes{% else %}No{% endif %}</h4>
+                <h4>History: {% if history %}Yes{% else %}No{% endif %}</h4>
+                <h4>Insight: {% if insight %}Yes{% else %}No{% endif %}</h4>
+                <h4>Intimidation: {% if intimidation %}Yes{% else %}No{% endif %}</h4>
+                <h4>Investigation: {% if investigation %}Yes{% else %}No{% endif %}</h4>
+                <h4>Medicine: {% if medicine %}Yes{% else %}No{% endif %}</h4>
+                <h4>Nature: {% if nature %}Yes{% else %}No{% endif %}</h4>
+                <h4>Perception: {% if perception %}Yes{% else %}No{% endif %}</h4>
+                <h4>Performance: {% if performance %}Yes{% else %}No{% endif %}</h4>
+                <h4>Persuasion: {% if persuasion %}Yes{% else %}No{% endif %}</h4>
+                <h4>Religion: {% if religion %}Yes{% else %}No{% endif %}</h4>
+                <h4>Sleight of Hand: {% if sleight_of_hand %}Yes{% else %}No{% endif %}</h4>
+                <h4>Stealth: {% if stealth %}Yes{% else %}No{% endif %}</h4>
+                <h4>Survival: {% if survival %}Yes{% else %}No{% endif %}</h4>
+
             </div>
         </div>
 

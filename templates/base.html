@@ -25,11 +25,14 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active switch"><a href="/characters">Sheets</a></li>
+                <li class="switch"><a href="/characters">Sheets</a></li>
+                <li class="switch"><a href="/new-character">Create Character</a></li>
                 <li class="switch"><a href="/campaigns">Campaigns</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right navbarLogin">
+                <li><a href="/new-user"><span class="glyphicon glyphicon-log-in navbarSignup"></span> Sign Up</a></li>
                 <li><a href="/login"><span class="glyphicon glyphicon-log-in navbarLogin"></span> Login</a></li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out navbarLogout"></span> Logout</a></li>
             </ul>
         </div>
     </div>
@@ -40,7 +43,7 @@
 <div class="container">
     {% for message in get_flashed_messages() %}
     <div class="alert alert-warning">
-        <button type=""button" class="close" data-dismiss="alert">&times;</button>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{ message }}
     </div>
     {% endfor %}
