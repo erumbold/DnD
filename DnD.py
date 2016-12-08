@@ -56,12 +56,12 @@ class CharForm(Form):
     hit_dice = SelectField("Hit Dice", validators=[Required()], choices=[
         ("d12", "d12"), ("d10", "d10"), ("d8", "d8"), ("d6", "d6"), ("d4", "d4")
     ])
-    total_hit_dice = IntegerField("Total Hit Dice", validators=[Required()])
-    prof_bonus = IntegerField("Proficiency Bonus", validators=[Required()])
-    exp_points = IntegerField("Experience Points", validators=[Required()])
-    armor_class = IntegerField("Armor Class", validators=[Required()])
-    speed = IntegerField("Speed", validators=[Required()])
-    max_HP = IntegerField("Max HP", validators=[Required()])
+    total_hit_dice = IntegerField("Total Hit Dice")
+    prof_bonus = IntegerField("Proficiency Bonus")
+    exp_points = IntegerField("Experience Points")
+    armor_class = IntegerField("Armor Class")
+    speed = IntegerField("Speed")
+    max_HP = IntegerField("Max HP")
 
     # abilities
     str = IntegerField("Strength", validators=[Required()])
@@ -72,12 +72,12 @@ class CharForm(Form):
     cha = IntegerField("Charisma", validators=[Required()])
 
     # ability modifiers
-    str_mod = IntegerField("Strength Modifier", validators=[Required()])
-    dex_mod = IntegerField("Dexterity Modifier", validators=[Required()])
-    con_mod = IntegerField("Constitution Modifier", validators=[Required()])
-    int_mod = IntegerField("Intelligence Modifier", validators=[Required()])
-    wis_mod = IntegerField("Wisdom Modifier", validators=[Required()])
-    cha_mod = IntegerField("Charisma Modifier", validators=[Required()])
+    str_mod = IntegerField("Strength Modifier")
+    dex_mod = IntegerField("Dexterity Modifier")
+    con_mod = IntegerField("Constitution Modifier")
+    int_mod = IntegerField("Intelligence Modifier")
+    wis_mod = IntegerField("Wisdom Modifier")
+    cha_mod = IntegerField("Charisma Modifier")
 
     # saving throws - check boxes, only pick 2
     str_save = BooleanField("Strength Save")
@@ -225,16 +225,36 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('500.html'), 500
 
-@app.route("/user/characters/<name>")
+
+@app.route("/characters/<name>")
 def character(name):
-    return render_template("Home.html")
+    for c in Character.query.all():
+        if (c.name == name):
+            return render_template("Character_Sheet.html", name=c.name,
+                                   campaign=Campaign.query.filter_by(id=c.campaign_id).first(), race=c.race,
+                                   cClass=c.cClass, level=c.level, hit_dice=c.hit_dice, total_hit_dice=c.total_hit_dice,
+                                   prof_bonus=c.prof_bonus, exp_points=c.exp_points, armor_class=c.armor_class,
+                                   speed=c.speed, max_HP=c.max_HP, curr_HP=c.curr_HP, temp_HP=c.temp_HP, str=c.str,
+                                   dex=c.dex, con=c.con, int=c.int, wis=c.wis, cha=c.cha, str_mod=c.str_mod,
+                                   dex_mod=c.dex_mod, con_mod=c.con_mod, int_mod=c.int_mod, wis_mod=c.wis_mod,
+                                   cha_mod=c.cha_mod, str_save=c.str_save, dex_save=c.dex_save, con_save=c.con_save,
+                                   int_save=c.int_save, wis_save=c.wis_save, cha_save=c.cha_save, acrobatics=c.acrobatics,
+                                   animal_handling=c.animal_handling, arcana=c.arcana, athletics=c.athletics,
+                                   deception=c.deception, history=c.history, insight=c.insight, intimidation=c.intimidation,
+                                   investigation=c.investigation, medicine=c.medicine, nature=c.nature, perception=c.perception,
+                                   performance=c.performance, persuasion=c.persuasion, religion=c.religion,
+                                   sleight_of_hand=c.sleight_of_hand, stealth=c.stealth, survival=c.survival)
+
+    return render_template("Character_Not_Found.html")
+
 
 @app.route("/user/<name>")
 def user(name):
-    return render_template('User_Page.html', name=name,
-                           characters=[c.name for c in Character.query.filter_by(
-                               user_id=User.query.filter_by(
-                                    username=session['username']).first().id)])
+    if (name in [c.username for c in User.query.all()]):
+        id = User.query.filter_by(username=name).first().id
+        characters = [c.name for c in Character.query.filter_by(user_id=id)]
+        return render_template('User_Page.html', name=name, characters=characters)
+    return render_template('404.html')
 
 
 # To be called when the player clicks the logout button
@@ -266,7 +286,7 @@ def login():
     return render_template("Logged_In.html", name=session['username'])
 
 
-@app.route('/new_user', methods=["GET", "POST"])
+@app.route('/new-user', methods=["GET", "POST"])
 def new_user():
     if (session['username'] is None):
         username = None
@@ -475,7 +495,10 @@ def character_list():
     if (session['username'] is None):
         return render_template("Must_Login.html")
 
-    return render_template("Characters.html")
+    id = User.query.filter_by(username=session['username']).first().id
+    characters = [c.name for c in Character.query.filter_by(user_id=id)]
+
+    return render_template('Characters.html', name=session['username'], characters=characters)
 
 
 @app.route('/campaigns')
