@@ -4,10 +4,15 @@
 {% block title %}Dungeons and Dragons{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
+<div>
     {% if name %}{{ name }} has been registered as a user {%  endif %}
-    <h1 class="headings">Register:</h1>
-</div>
 
-{{ wtf.quick_form(form) }}
+</div>
+    <br><br>
+<div class="loginDiv">
+
+    <h1 class="headings">Register:</h1>
+    {{ wtf.quick_form(form) }}
+</div>
+<br><br>
 {% endblock %}
