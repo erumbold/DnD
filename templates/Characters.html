@@ -2,15 +2,7 @@
 {% block title %}Dungeons and Dragons{% endblock %}
 
 {% block page_content %}
-    <h1 class="headings">Your current characters:</h1>
-    {% if characters %}
-        <ol class="page">
-        {% for character in characters %}
-            <h3><a href={{ url_for('character', name=character) }}>{{ character }}</a></h3>
-        {% endfor %}
-        </ol>
-    {% else %}
-        <h3 class="page">You currently have no characters</h3>
-    {% endif %}
+
+    <h4>To be done later</h4>
 
 {% endblock %}
