@@ -3,6 +3,14 @@
 
 {% block page_content %}
 
-    <h4>To be done later</h4>
+    {% if campaigns %}
+        <ol>
+        {% for c in campaigns %}
+            <h4><a href={{ url_for('campaign', name=c) }}>{{ c }}</a></h4>
+        {% endfor %}
+        </ol>
+    {% else %}
+    <h4>There are currently no campaigns on this website.</h4>
+    {% endif %}
 
 {% endblock %}
