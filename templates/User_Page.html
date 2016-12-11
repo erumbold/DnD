@@ -2,18 +2,7 @@
 {% block title %}Dungeons and Dragons{% endblock %}
 
 {% block page_content %}
-<div class="page-header page">
-    <h4>{{ name }}'s Page</h4>
-    <br><br>
-    <h4>{{ name }}'s current characters:</h4>
-    {% if characters %}
-        <ol>
-        {% for character in characters %}
-            <a href={{ url_for('character', name=character) }}>{{ character }}</a>
-        {% endfor %}
-        </ol>
-    {% else %}
-        <h5>No characters were found belonging to {{ name }}</h5>
-    {% endif %}
+<div class="page-header">
+    <h4>You are currently logged in as {{ name }}</h4>
 </div>
 {% endblock %}
