@@ -51,11 +51,11 @@ a{
 }
 
 .loginDiv{
-    margin-top:100px;
     margin-left:40%;
     margin-right:45%;
+    text-align: center;
     width: 300px;
-    padding: 5px;
+    padding: 15px;
     padding-bottom: 15px;
     background-color:#ffffff;
     border-radius: 1em;
@@ -110,4 +110,19 @@ img{
     height:100px;
     padding:0px;
     margin:0px;
+}
+
+.background{
+    background: url('src/background.jpg') no-repeat center center fixed;
+    background-color: #000;
+    height: 50%;
+    -webkit-background-size: cover%;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    visibility: visible;
+}
+
+.background2 {
+    background-color: #af000a;
 }
