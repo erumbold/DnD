@@ -3,17 +3,19 @@
 
 {% block page_content %}
 <div class="page-header">
-    <h4>{{ name }}'s Page</h4>
+<img class="dragon" src='static/dragon.png'>
+
+    <h2 class="headings">{{ name }}'s Page</h2>
     <br><br>
-    <h4>{{ name }}'s current characters:</h4>
+    <h4 class="page">{{ name }}'s current characters:</h4>
     {% if characters %}
         <ol>
         {% for character in characters %}
-            <h5><a href={{ url_for('character', name=character) }}>{{ character }}</a></h5>
+            <h5 class="page"><a href={{ url_for('character', name=character) }}>{{ character }}</a></h5>
         {% endfor %}
         </ol>
     {% else %}
-        <h5>No characters were found belonging to {{ name }}</h5>
+        <h5 class="page">No characters were found belonging to {{ name }}</h5>
     {% endif %}
 </div>
 {% endblock %}

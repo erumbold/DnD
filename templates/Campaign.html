@@ -4,18 +4,20 @@
 {% block title %}Dungeons and Dragons{% endblock %}
 
 {% block page_content %}
+    <img class="dragon" src="static/dragon.png">
+
 <div class="page-header">
-    <h3>{{ campaign }}</h3>
+    <h3 class="page">{{ campaign }}</h3>
     {% if characters %}
         <ol>
         {% for c in characters %}
-            <h4><a href={{ url_for('character', name=c) }}>{{ c }}</a></h4>
+            <h4 class="page"><a href={{ url_for('character', name=c) }}>{{ c }}</a></h4>
         {% endfor %}
         </ol>
     {% else %}
-        <h3>This campaign has no characters</h3>
+        <h3 class="page">This campaign has no characters</h3>
     {% endif %}
-    <h3><a href={{ url_for('add_character', name=campaign) }}>Join this campaign</a></h3>
+    <h3 class="page"><a href={{ url_for('add_character', name=campaign) }}>Join this campaign</a></h3>
 
 </div>
 

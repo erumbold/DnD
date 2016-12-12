@@ -4,9 +4,12 @@
 {% block title %}Dungeons and Dragons{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
+<img class="dragon" src="static/dragon.png">
+<br><br>
+    <div class="pageLinks loginDiv">
     <h1 class="headings">Register:</h1>
-</div>
+
 
 {{ wtf.quick_form(form) }}
+    </div>
 {% endblock %}

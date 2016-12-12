@@ -112,17 +112,18 @@ img{
     margin:0px;
 }
 
-.background{
-    background: url('src/background.jpg') no-repeat center center fixed;
-    background-color: #000;
-    height: 50%;
-    -webkit-background-size: cover%;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+.dragon{
+    position: absolute;
+    z-index: -1;
+    width:90%;
+    height:100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
-    visibility: visible;
 }
 
-.background2 {
-    background-color: #af000a;
+.error{
+    height:200px;
+    width:auto;
 }
